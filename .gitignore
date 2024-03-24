@@ -1,0 +1,5 @@
+# Virtual environment
+ensemble_venv/
+
+# Jupyter Notebook specific
+.ipynb_checkpoints/
