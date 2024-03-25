@@ -48,8 +48,8 @@ jupyter notebook
 
 ### Further steps:
 
-- Click on the Proposed Solution.ipynb file
-- Select the "ensemble_kernel" in Proposed Solution.ipynb
+- Click on the Evaluation.ipynb file
+- Select the "ensemble_kernel" in Evaluation.ipynb
 - When it is opened, run all the cells together or one after another
 
 ### In case of any error:

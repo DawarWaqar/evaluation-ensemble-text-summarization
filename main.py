@@ -2,6 +2,7 @@ import re
 import pandas as pd
 import nltk
 import ssl
+import numpy as np
 
 
 from textacy import preprocessing as prep
@@ -10,6 +11,7 @@ from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lsa import LsaSummarizer
 from rouge import Rouge
 from nltk.tokenize.punkt import PunktSentenceTokenizer
+from scipy import stats
 
 # from matplotlib import pyplot as plt
 
@@ -125,15 +127,30 @@ def generate_ensemble_summary(
     return ".".join(list(sorted_text_score_dict.keys())[:3])
 
 
-# def plot_rouge_scores(rouge_1_score, rouge_2_score, rouge_l_score, title):
+def perform_t_test(scores_1, scores_2):
+    # calculate pairwise differences
+    differences = scores_1 - scores_2
 
-#     labels = ["ROUGE-1", "ROUGE-2", "ROUGE-L"]
-#     scores = [rouge_1_score, rouge_2_score, rouge_l_score]
-#     plt.bar(labels, scores, color=["blue", "green", "orange"])
+    t_statistic, p_value = stats.ttest_rel(scores_1, scores_2)
 
-#     plt.title(title)
+    print("Paired Samples T-test Results:")
+    print("t-statistic:", t_statistic)
+    print("p-value:", p_value)
+    # Interpret the results
+    alpha = 0.05
+    if p_value < alpha:
+        print(
+            "Reject the null hypothesis. There is a significant difference between the mean ROUGE scores of Model 1 and Model 2."
+        )
+    else:
+        print(
+            "Fail to reject the null hypothesis. There is no significant difference between the mean ROUGE scores of Model 1 and Model 2."
+        )
 
-#     plt.show()
 
+def return_scores(df, column):
+    val = []
+    for idx in range(df.shape[0]):
+        val.append(df[column].iloc[idx]["r"])
 
-# plot_rouge_scores(1, 2, 3, "")
+    return np.array(val)
