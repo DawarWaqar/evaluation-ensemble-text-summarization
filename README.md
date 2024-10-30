@@ -56,3 +56,7 @@ jupyter notebook
 
 - Please switch the kernel to the default one
 - Restart the kernel
+
+## Paper
+
+[Drive Link](https://drive.google.com/file/d/1bY20bo4k9iyjww-mQ5O1yYKZam16Y317/view?usp=drive_link)
